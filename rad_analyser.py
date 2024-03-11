@@ -1,3 +1,4 @@
+# Dictionary to host locations
 locations = [
     "City Centre", 
     "Industrial Zone", 
@@ -6,6 +7,7 @@ locations = [
     "Downtown"
     ]
 
+# Dictionary to host each location's measurement levels
 levels = [
     [22.00, 19.00, 20.00, 31.00, 28.00],
     [35.00, 32.00, 30.00, 37.00, 40.00],
@@ -14,10 +16,15 @@ levels = [
     [25.00, 18.00, 22.00, 21.00, 26.00]
 ]
 
+# Import math - consider importing this at the start next time?
 import math
+
+# Function to calculate average
 
 def calc_avg(levels):
     return sum(levels) / len(levels)
+
+# Function to calculate Standard Deviation
 
 def calc_sd(levels):
     mean = sum(levels) / len(levels)
@@ -25,7 +32,11 @@ def calc_sd(levels):
     std = math.sqrt(var)
     return std
 
+# Begin radiation analyser
+
 print("""Welcome to the Radiation Analyser.\n""")
+
+# Use a for loop to print pre-set measurements for each location
 
 for i, location in enumerate(locations):
     # Average
@@ -39,17 +50,25 @@ for i, location in enumerate(locations):
     sd = calc_sd(levels[i])
 
     print(f"{location} Standard Deviation of Radiation level: {sd:.2f}\n")
-    
+
+# For custom measurements and to get average + SD
+
+# Initialise measurements empty dictionary    
 measurements = []
 
+
+# Use a while loop to engage the user
 while True:
     
+    # Ask user to insert value
     level = input("Enter radiation level ('done' to finish):\n")
 
+    # User exit prompt
     if level.lower() == 'done':    
         print("Debug: Exiting input loop.")
         break
     
+    # Try/except to add or catch invalid value
     try:
         new_level = int(level)
         measurements.append(new_level)
@@ -59,7 +78,7 @@ while True:
     except ValueError:
             print("Invalid input. Please enter a valid number or 'done'.")
 
-
+# If/Else to complete and return mathematical functions on custom measurements
 if measurements:
 
     average = calc_avg(measurements)
